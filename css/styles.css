@@ -1,37 +1,57 @@
-/* css/styles.css */
-@import "variables.css";
 @import "components/header.css";
-@import "components/product-card.css";
-@import "components/cart-modal.css";
-@import "components/footer.css";
-@import "responsive/mobile.css";
-@import "responsive/tablet.css";
+@import "components/hero.css";
+@import "components/filters.css";
+@import "components/product.css";
+@import "components/cart.css";
+@import "responsive.css";
 
-/* Основные стили */
+:root {
+  --primary-color: #2d3436;
+  --secondary-color: #e84393;
+  --accent-color: #0984e3;
+  --bg-light: #f5f6fa;
+  --text-dark: #2d3436;
+  --border-radius: 12px;
+  --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --font-main: "Inter", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: var(--font-main);
-  line-height: 1.6;
-  color: var(--text-dark);
   background: var(--bg-light);
-  margin: 0;
-  padding-top: 60px;
+  color: var(--text-dark);
+  line-height: 1.6;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 15px;
 }
 
-.page-title {
-  text-align: center;
-  margin: 40px 0;
-  font-size: 2.5rem;
-  color: var(--primary-color);
+.loader {
+  display: inline-block;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--accent-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 2rem auto;
+  display: none;
 }
 
-/* Активный класс для навигации */
-.nav-link.active {
-  color: var(--secondary-color);
-  font-weight: 500;
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

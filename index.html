@@ -3,117 +3,105 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fashion Store | Одежда и аксессуары</title>
-    <link rel="stylesheet" href="css/variables.css" />
-    <link rel="stylesheet" href="css/components/header.css" />
-    <link rel="stylesheet" href="css/components/product-card.css" />
-    <link rel="stylesheet" href="css/components/cart-modal.css" />
-    <link rel="stylesheet" href="css/components/footer.css" />
-    <link rel="stylesheet" href="css/responsive/mobile.css" />
-    <link rel="stylesheet" href="css/responsive/tablet.css" />
+    <title>FashionStore | Интернет-магазин</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+    />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
     <header class="header">
       <div class="container">
         <a href="/" class="logo">FashionStore</a>
+
         <nav class="nav">
-          <ul class="nav-list">
+          <button class="menu-toggle" id="menuToggle">☰</button>
+          <ul class="nav-list" id="navList">
             <li>
-              <a href="#" class="nav-link" data-category="all">Все товары</a>
+              <a href="#" class="nav-link active" data-category="all">Все</a>
             </li>
             <li>
-              <a href="#" class="nav-link" data-category="Мужчины">Мужчины</a>
+              <a href="#" class="nav-link" data-category="men">Мужчины</a>
             </li>
             <li>
-              <a href="#" class="nav-link" data-category="Женщины">Женщины</a>
+              <a href="#" class="nav-link" data-category="women">Женщины</a>
             </li>
-            <li><a href="#" class="nav-link" data-category="Дети">Дети</a></li>
-            <li><a href="#" class="nav-link" data-category="Дом">Дом</a></li>
+            <li><a href="#" class="nav-link" data-category="kids">Дети</a></li>
             <li>
-              <a href="#" class="nav-link" data-category="Скидки">Скидки</a>
-            </li>
-            <li>
-              <a href="#" class="nav-link" data-category="Услуги">Услуги</a>
-            </li>
-            <li>
-              <a href="#" class="nav-link" data-category="Эксклюзив"
-                >Эксклюзив</a
-              >
+              <a href="#" class="nav-link" data-category="sale">Распродажа</a>
             </li>
           </ul>
-          <button class="cart-btn" id="cartButton">
-            <span class="cart-count">0</span>
-            🛒
-          </button>
         </nav>
+
+        <div class="header-actions">
+          <button class="cart-btn" id="cartToggle">
+            <span class="cart-count">0</span>
+            <svg class="cart-icon" width="24" height="24" viewBox="0 0 24 24">
+              <path
+                d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
     </header>
 
-    <main class="main-content">
+    <section class="hero">
       <div class="container">
-        <h1 class="page-title">Новая коллекция</h1>
-        <div class="products-grid" id="productsContainer"></div>
+        <div class="hero-content">
+          <h1 class="hero-title">Новая коллекция 2024</h1>
+          <p class="hero-subtitle">Стильная одежда по доступным ценам</p>
+          <a href="#products" class="hero-cta">Смотреть новинки</a>
+        </div>
+      </div>
+    </section>
+
+    <main class="main">
+      <div class="container">
+        <div class="filters">
+          <div class="filter-group">
+            <label>Сортировка:</label>
+            <select id="sortSelect" class="filter-select">
+              <option value="price_asc">По возрастанию цены</option>
+              <option value="price_desc">По убыванию цены</option>
+              <option value="rating">По рейтингу</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label>Цена до:</label>
+            <input
+              type="range"
+              id="priceRange"
+              class="filter-range"
+              min="0"
+              max="20000"
+              step="500"
+            />
+            <span id="priceValue">20 000 ₽</span>
+          </div>
+        </div>
+
+        <div class="products-grid" id="productsGrid"></div>
       </div>
     </main>
 
     <div class="cart-modal" id="cartModal">
+      <div class="cart-overlay" id="cartOverlay"></div>
       <div class="cart-content">
         <div class="cart-header">
-          <h2>Ваша корзина</h2>
+          <h3>Ваша корзина</h3>
           <button class="close-btn" id="closeCart">&times;</button>
         </div>
-        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-body" id="cartItems"></div>
         <div class="cart-footer">
-          <div class="cart-total">Итого: <span id="cartTotal">0</span> ₽</div>
+          <div class="cart-total">Итого: <span id="totalPrice">0</span> ₽</div>
           <button class="checkout-btn">Оформить заказ</button>
         </div>
       </div>
     </div>
 
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-grid">
-          <div class="footer-section">
-            <h4>О нас</h4>
-            <p>FashionStore - ведущий ритейлер модной одежды с 2010 года</p>
-          </div>
-          <div class="footer-section">
-            <h4>Категории</h4>
-            <ul>
-              <li><a href="#">Мужчины</a></li>
-              <li><a href="#">Женщины</a></li>
-              <li><a href="#">Дети</a></li>
-              <li><a href="#">Дом</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h4>Помощь</h4>
-            <ul>
-              <li><a href="#">Доставка</a></li>
-              <li><a href="#">Возврат</a></li>
-              <li><a href="#">Контакты</a></li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h4>Соцсети</h4>
-            <div class="social-links">
-              <a href="#">Instagram</a>
-              <a href="#">Facebook</a>
-              <a href="#">Telegram</a>
-            </div>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>© 2024 FashionStore. Все права защищены</p>
-        </div>
-      </div>
-    </footer>
-
-    <script src="js/utils/helpers.js"></script>
-    <script src="js/api.js"></script>
-    <script src="js/cart.js"></script>
-    <script src="js/products.js"></script>
-    <script src="js/app.js"></script>
+    <script type="module" src="js/app.js"></script>
   </body>
 </html>

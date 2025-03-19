@@ -1,80 +1,48 @@
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-export const initCart = () => {
-  updateCartCount();
-};
-
-export const addToCart = (product, size) => {
-  const existing = cart.find(
-    (item) => item.id === product.id && item.size === size
-  );
-
-  if (existing) {
-    existing.quantity += 1;
-  } else {
-    cart.push({
-      ...product,
-      size: size || "N/A",
-      quantity: 1,
-    });
+export class Cart {
+  constructor() {
+    this.items = JSON.parse(localStorage.getItem("cart")) || [];
   }
 
-  saveCart();
-};
+  add(item) {
+    const existing = this.items.find(
+      (i) => i.id === item.id && i.size === item.size
+    );
 
-const saveCart = () => {
-  localStorage.setItem("cart", JSON.stringify(cart));
-  updateCartCount();
-};
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      this.items.push({ ...item, quantity: 1 });
+    }
 
-export const removeFromCart = (index) => {
-  cart.splice(index, 1);
-  saveCart();
-  renderCartItems();
-};
+    this.save();
+  }
 
-export const getCartTotal = () => {
-  return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-};
+  remove(id) {
+    this.items = this.items.filter((item) => item.id !== id);
+    this.save();
+  }
 
-export const updateCartCount = () => {
-  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-  document.querySelector(".cart-count").textContent = count;
-};
+  clear() {
+    this.items = [];
+    this.save();
+  }
 
-export const renderCartItems = () => {
-  const container = document.getElementById("cartItems");
-  const totalElement = document.getElementById("cartTotal");
+  get total() {
+    return this.items.reduce((sum, item) => {
+      const price = item.discount
+        ? item.price * (1 - item.discount / 100)
+        : item.price;
+      return sum + price * item.quantity;
+    }, 0);
+  }
 
-  container.innerHTML = cart
-    .map(
-      (item, index) => `
-        <div class="cart-item">
-            <img src="${item.image || "images/placeholder.jpg"}" alt="${
-        item.title
-      }" class="cart-item-image">
-            <div class="cart-item-info">
-                <h4>${item.title}</h4>
-                ${item.size ? `<p>Размер: ${item.size}</p>` : ""}
-                <p>${item.price}₽ x ${item.quantity}</p>
-            </div>
-            <button class="remove-btn" onclick="removeFromCart(${index})">×</button>
-        </div>
-    `
-    )
-    .join("");
+  save() {
+    localStorage.setItem("cart", JSON.stringify(this.items));
+    this.updateUI();
+  }
 
-  totalElement.textContent = getCartTotal();
-};
-
-export const filterProducts = (category, products) => {
-  const filtered = products.filter((product) => {
-    if (category === "all") return true;
-    if (category === "Скидки") return product.discount;
-    if (category === "Эксклюзив") return product.exclusive;
-    if (category === "Услуги") return product.service;
-    return product.category === category;
-  });
-
-  renderProducts(filtered);
-};
+  updateUI() {
+    const count = this.items.reduce((sum, item) => sum + item.quantity, 0);
+    document.querySelector(".cart-count").textContent = count;
+  }
+}
