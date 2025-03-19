@@ -2,8 +2,8 @@
   display: flex;
   gap: 2rem;
   padding: 2rem 0;
+  margin: 2rem 0;
   border-bottom: 1px solid #eee;
-  margin-bottom: 3rem;
   flex-wrap: wrap;
 }
 
@@ -11,19 +11,40 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  background: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
 }
 
 .filter-select {
   padding: 0.5rem 1rem;
-  border: 1px solid #ddd;
+  border: 1px solid #eee;
   border-radius: 8px;
   background: white;
-  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--accent-color);
 }
 
 .filter-range {
   width: 200px;
   height: 4px;
-  background: #ddd;
+  background: #eee;
   border-radius: 2px;
+  -webkit-appearance: none;
+}
+
+.filter-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  cursor: pointer;
 }
