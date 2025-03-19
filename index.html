@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fashion Store | Одежда и аксессуары</title>
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/components/header.css" />
+    <link rel="stylesheet" href="css/components/product-card.css" />
+    <link rel="stylesheet" href="css/components/cart-modal.css" />
+    <link rel="stylesheet" href="css/components/footer.css" />
+    <link rel="stylesheet" href="css/responsive/mobile.css" />
+    <link rel="stylesheet" href="css/responsive/tablet.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <a href="/" class="logo">FashionStore</a>
+        <nav class="nav">
+          <ul class="nav-list">
+            <li>
+              <a href="#" class="nav-link" data-category="all">Все товары</a>
+            </li>
+            <li>
+              <a href="#" class="nav-link" data-category="Мужчины">Мужчины</a>
+            </li>
+            <li>
+              <a href="#" class="nav-link" data-category="Женщины">Женщины</a>
+            </li>
+            <li><a href="#" class="nav-link" data-category="Дети">Дети</a></li>
+            <li><a href="#" class="nav-link" data-category="Дом">Дом</a></li>
+            <li>
+              <a href="#" class="nav-link" data-category="Скидки">Скидки</a>
+            </li>
+            <li>
+              <a href="#" class="nav-link" data-category="Услуги">Услуги</a>
+            </li>
+            <li>
+              <a href="#" class="nav-link" data-category="Эксклюзив"
+                >Эксклюзив</a
+              >
+            </li>
+          </ul>
+          <button class="cart-btn" id="cartButton">
+            <span class="cart-count">0</span>
+            🛒
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="container">
+        <h1 class="page-title">Новая коллекция</h1>
+        <div class="products-grid" id="productsContainer"></div>
+      </div>
+    </main>
+
+    <div class="cart-modal" id="cartModal">
+      <div class="cart-content">
+        <div class="cart-header">
+          <h2>Ваша корзина</h2>
+          <button class="close-btn" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+          <div class="cart-total">Итого: <span id="cartTotal">0</span> ₽</div>
+          <button class="checkout-btn">Оформить заказ</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-section">
+            <h4>О нас</h4>
+            <p>FashionStore - ведущий ритейлер модной одежды с 2010 года</p>
+          </div>
+          <div class="footer-section">
+            <h4>Категории</h4>
+            <ul>
+              <li><a href="#">Мужчины</a></li>
+              <li><a href="#">Женщины</a></li>
+              <li><a href="#">Дети</a></li>
+              <li><a href="#">Дом</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Помощь</h4>
+            <ul>
+              <li><a href="#">Доставка</a></li>
+              <li><a href="#">Возврат</a></li>
+              <li><a href="#">Контакты</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Соцсети</h4>
+            <div class="social-links">
+              <a href="#">Instagram</a>
+              <a href="#">Facebook</a>
+              <a href="#">Telegram</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2024 FashionStore. Все права защищены</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
