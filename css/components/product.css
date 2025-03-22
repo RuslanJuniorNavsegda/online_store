@@ -1,3 +1,4 @@
+/* Product Card Styles */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -11,6 +12,7 @@
   overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
   position: relative;
+  cursor: pointer;
 }
 
 .product-card:hover {
@@ -23,6 +25,7 @@
   height: 320px;
   object-fit: cover;
   border-bottom: 1px solid #eee;
+  transition: transform 0.3s;
 }
 
 .product-info {
@@ -34,6 +37,8 @@
   margin-bottom: 0.75rem;
   color: var(--primary-color);
   line-height: 1.4;
+  height: 3em;
+  overflow: hidden;
 }
 
 .price-block {
@@ -64,11 +69,13 @@
   font-family: inherit;
   background: #f8f9fa;
   transition: border-color 0.3s;
+  appearance: none;
 }
 
 .size-selector:focus {
   outline: none;
   border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(9, 132, 227, 0.1);
 }
 
 .add-to-cart {
@@ -80,7 +87,11 @@
   border-radius: 8px;
   cursor: pointer;
   font-weight: 500;
-  transition: background 0.3s, transform 0.3s;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .add-to-cart:hover {
@@ -98,4 +109,61 @@
   border-radius: 20px;
   font-size: 0.85rem;
   font-weight: 500;
+  z-index: 1;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .product-image {
+    height: 250px;
+  }
+
+  .product-title {
+    font-size: 1rem;
+    height: auto;
+  }
+
+  .new-price {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-card {
+    margin-bottom: 1rem;
+  }
+
+  .size-selector {
+    padding: 0.5rem;
+  }
+
+  .add-to-cart {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Анимация загрузки */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.loading .product-image {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
 }
